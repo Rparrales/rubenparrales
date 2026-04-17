@@ -29,14 +29,20 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Rubén Parrales — Full Stack Developer" },
+      {
+        name: "description",
+        content:
+          "Rubén Parrales — Full Stack Developer with 22+ years of experience in .NET, Azure, web and mobile applications.",
+      },
+      { name: "author", content: "Rubén Parrales" },
+      { property: "og:title", content: "Rubén Parrales — Full Stack Developer" },
+      {
+        property: "og:description",
+        content: "22+ years building web, mobile and enterprise software with .NET, Azure and modern web stacks.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {

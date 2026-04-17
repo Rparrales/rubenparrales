@@ -1,5 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import {
+  Cloud,
+  Briefcase,
+  Server,
+  Code2,
+  Satellite,
+  Gamepad2,
+  Mail,
+  Phone,
+  MapPin,
+  Download,
+  ArrowUpRight,
+  Cpu,
+  Database,
+  Smartphone,
+  Globe,
+  ShieldCheck,
+  Sparkles,
+  Terminal,
+  Zap,
+} from "lucide-react";
+import heroTech from "@/assets/hero-tech.jpg";
+import portraitTech from "@/assets/portrait-tech.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -8,7 +31,7 @@ export const Route = createFileRoute("/")({
 const NAV = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
-  { id: "skills", label: "Skills" },
+  { id: "skills", label: "Stack" },
   { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ];
@@ -20,24 +43,32 @@ const EXPERIENCE = [
     company: "Cloud Business Solutions (CBS)",
     description:
       "Bank integrations, web, mobile (Android / iOS), APIs and e-commerce. C#, ASP.NET Core, Azure, SQL Server, Xamarin, Laravel, PHP, Bootstrap.",
+    icon: Cloud,
+    tags: [".NET", "Azure", "Xamarin"],
   },
   {
     period: "2018 — 2019",
     role: "Project Manager",
     company: "AlmoTechnology (Grupo Almo)",
     description: "QA, project management, documentation and end-user training.",
+    icon: Briefcase,
+    tags: ["PM", "QA"],
   },
   {
     period: "2015 — 2018",
     role: "IT Manager",
     company: "Vanguard Security",
     description: "Project management, server administration and data analysis.",
+    icon: Server,
+    tags: ["DevOps", "Data"],
   },
   {
     period: "2014 — 2015",
     role: ".NET Developer",
     company: "Financiera Kineret (Grupo Kineret)",
     description: "ERP / CRM / GPS integrations. VB & C# .NET. DevExpress specialist.",
+    icon: Code2,
+    tags: ["C#", "ERP"],
   },
   {
     period: "2008 — 2010",
@@ -45,6 +76,8 @@ const EXPERIENCE = [
     company: "GPS Satélite",
     description:
       "GPS tracking software (desktop & web), GIS knowledge and routing software analysis.",
+    icon: Satellite,
+    tags: ["GPS", "GIS"],
   },
   {
     period: "2004 — 2008",
@@ -52,6 +85,8 @@ const EXPERIENCE = [
     company: "Central Valley Technology",
     description:
       "Online gaming software solutions: online casino, online poker and corporate websites.",
+    icon: Gamepad2,
+    tags: ["UI/UX", "Gaming"],
   },
 ];
 
@@ -64,23 +99,82 @@ const EDUCATION = [
   { title: "EPSON POS / ESC Specialist", place: "EPSON Costa Rica" },
 ];
 
-const SKILLS = [
-  "C#", ".NET / ASP.NET Core", "Azure", "SQL Server", "REST APIs",
-  "JavaScript", "jQuery", "HTML5", "CSS3", "MVC / MVVM",
-  "Xamarin", "Android / iOS", "Node.js", "Laravel · PHP", "SEO",
+const SKILL_GROUPS = [
+  {
+    icon: Code2,
+    title: "Backend",
+    items: ["C#", ".NET / ASP.NET Core", "REST APIs", "MVC / MVVM", "Node.js"],
+  },
+  {
+    icon: Globe,
+    title: "Frontend",
+    items: ["JavaScript", "HTML5", "CSS3", "jQuery", "Bootstrap"],
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    items: ["Azure", "SQL Server", "CI/CD", "Server Admin"],
+  },
+  {
+    icon: Smartphone,
+    title: "Mobile",
+    items: ["Xamarin", "Android", "iOS"],
+  },
+  {
+    icon: Database,
+    title: "Data",
+    items: ["SQL", "Database Design", "Data Analysis"],
+  },
+  {
+    icon: ShieldCheck,
+    title: "Quality & SEO",
+    items: ["QA Testing", "ISO 9001", "SEO"],
+  },
 ];
 
 const PROJECTS = [
-  { title: "REST API · Integrations", href: "https://wscbsecommerce.azurewebsites.net/", tag: "Backend" },
-  { title: "E-commerce platform", href: "https://tienda.cbs.cr/", tag: "Web" },
   {
-    title: "SIFO mobile app",
+    title: "REST API · Integrations",
+    href: "https://wscbsecommerce.azurewebsites.net/",
+    tag: "Backend",
+    icon: Server,
+    desc: "Bank & e-commerce integrations exposed as scalable APIs.",
+  },
+  {
+    title: "E-commerce Platform",
+    href: "https://tienda.cbs.cr/",
+    tag: "Web",
+    icon: Globe,
+    desc: "Full storefront with payments, catalog and POS sync.",
+  },
+  {
+    title: "SIFO Mobile App",
     href: "https://play.google.com/store/apps/details?id=cr.co.cbs.sifo&hl=es&gl=US",
     tag: "Mobile",
+    icon: Smartphone,
+    desc: "Native Android app on Google Play, used in production.",
   },
-  { title: "QA Testing Services", href: "#", tag: "Quality" },
-  { title: "UX / UI Design", href: "#", tag: "Design" },
-  { title: "Database Architecture", href: "#", tag: "Data" },
+  {
+    title: "QA Testing Services",
+    href: "#",
+    tag: "Quality",
+    icon: ShieldCheck,
+    desc: "End-to-end test plans, automation and release reviews.",
+  },
+  {
+    title: "UX / UI Design",
+    href: "#",
+    tag: "Design",
+    icon: Sparkles,
+    desc: "Interface design for desktop, web and mobile products.",
+  },
+  {
+    title: "Database Architecture",
+    href: "#",
+    tag: "Data",
+    icon: Database,
+    desc: "Schema design, performance tuning and reporting.",
+  },
 ];
 
 function Index() {
@@ -103,202 +197,350 @@ function Index() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+      {/* Ambient background grid + scanline */}
+      <div className="pointer-events-none fixed inset-0 bg-grid opacity-40" aria-hidden />
+      <div
+        className="pointer-events-none fixed left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--neon)] to-transparent opacity-60 animate-scan"
+        aria-hidden
+      />
+
       {/* NAV */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/60">
-        <div className="mx-auto max-w-6xl px-6 sm:px-10 h-16 flex items-center justify-between">
-          <a href="#top" className="font-display text-lg tracking-tight">
-            Rubén<span className="text-accent">.</span>
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/60 border-b border-border/60">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 h-16 flex items-center justify-between">
+          <a href="#top" className="flex items-center gap-2 font-mono text-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inset-0 rounded-full bg-[var(--neon)] animate-ping opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--neon)]" />
+            </span>
+            <span className="tracking-widest">RUBEN<span className="text-[var(--neon)]">.</span>DEV</span>
           </a>
-          <nav className="hidden md:flex gap-8 text-sm">
-            {NAV.map((n) => (
+          <nav className="hidden md:flex gap-7 text-xs font-mono uppercase tracking-widest">
+            {NAV.map((n, i) => (
               <a
                 key={n.id}
                 href={`#${n.id}`}
-                className={`transition-colors hover:text-foreground ${
-                  active === n.id ? "text-foreground" : "text-muted-foreground"
+                className={`transition-colors hover:text-[var(--neon)] ${
+                  active === n.id ? "text-[var(--neon)]" : "text-muted-foreground"
                 }`}
               >
+                <span className="text-[var(--neon)]/60 mr-1">0{i + 1}</span>
                 {n.label}
               </a>
             ))}
           </nav>
           <a
             href="https://rubenparrales.azurewebsites.net/docs/cv2021.pdf"
-            className="text-sm border border-foreground/80 px-4 py-2 rounded-full hover:bg-foreground hover:text-background transition-colors"
+            className="group inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest border border-[var(--neon)]/40 text-[var(--neon)] px-4 py-2 rounded-full hover:bg-[var(--neon)] hover:text-primary-foreground hover:shadow-[var(--shadow-neon)] transition-all"
           >
-            Download CV
+            <Download className="h-3.5 w-3.5" />
+            CV
           </a>
         </div>
       </header>
 
-      <main id="top" className="mx-auto max-w-6xl px-6 sm:px-10 pt-32 pb-32">
+      <main id="top" className="relative mx-auto max-w-7xl px-6 sm:px-10 pt-28 pb-32">
         {/* HERO */}
-        <section className="grid md:grid-cols-12 gap-10 items-end pb-32 border-b border-border">
-          <div className="md:col-span-8">
-            <p className="text-sm uppercase tracking-[0.25em] text-muted-foreground mb-6">
-              Full Stack Developer · Lynwood, CA
-            </p>
-            <h1 className="font-display text-6xl sm:text-7xl md:text-8xl leading-[0.95] text-balance">
-              Rubén
-              <br />
-              <span className="italic font-light">Parrales</span>
-            </h1>
-            <p className="mt-10 max-w-xl text-lg text-muted-foreground leading-relaxed">
-              Twenty-two years building software across every phase of the lifecycle —
-              from enterprise .NET systems and cloud APIs to mobile apps and e-commerce.
-              Passionate about adopting what's next.
-            </p>
+        <section className="relative pt-10 pb-32">
+          {/* Hero image backdrop */}
+          <div className="absolute inset-0 -z-10 rounded-3xl overflow-hidden border border-border/60 scanline">
+            <img
+              src={heroTech}
+              alt="Futuristic neural network visualization"
+              width={1920}
+              height={1080}
+              className="w-full h-full object-cover opacity-40"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
           </div>
-          <div className="md:col-span-4 md:text-right space-y-2 text-sm">
-            <div className="text-muted-foreground">Currently</div>
-            <div className="font-display text-2xl">CBS · Full Stack</div>
-            <div className="pt-6 text-muted-foreground">Available for</div>
-            <div className="font-display text-2xl italic">Freelance work</div>
+
+          <div className="grid md:grid-cols-12 gap-10 items-center px-4 sm:px-8 py-16 md:py-24">
+            <div className="md:col-span-8 space-y-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--neon)]/40 bg-[var(--neon)]/5 font-mono text-xs uppercase tracking-widest text-[var(--neon)]">
+                <Zap className="h-3 w-3" />
+                System online · Available for freelance
+              </div>
+
+              <h1 className="font-display text-5xl sm:text-7xl md:text-8xl font-bold leading-[0.95] text-balance">
+                Rubén Parrales
+                <span className="block text-gradient-neon mt-2">Full Stack Engineer</span>
+              </h1>
+
+              <p className="font-mono text-sm text-muted-foreground max-w-xl leading-relaxed">
+                <span className="text-[var(--neon)]">$</span> 22+ years shipping software across
+                .NET, Azure, web &amp; mobile.
+                <br />
+                <span className="text-[var(--neon)]">$</span> Building bank integrations, APIs,
+                e-commerce &amp; native apps.
+                <span className="animate-blink ml-1 text-[var(--neon)]">▍</span>
+              </p>
+
+              <div className="flex flex-wrap gap-3 pt-2">
+                <a
+                  href="#contact"
+                  className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--neon)] text-primary-foreground font-medium hover:shadow-[var(--shadow-neon)] transition-all"
+                >
+                  <Terminal className="h-4 w-4" />
+                  Initiate contact
+                  <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+                <a
+                  href="#projects"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border hover:border-[var(--magenta)] hover:text-[var(--magenta)] transition-colors"
+                >
+                  View projects
+                </a>
+              </div>
+            </div>
+
+            <div className="md:col-span-4 relative">
+              <div className="relative aspect-square rounded-2xl overflow-hidden border border-[var(--neon)]/30 shadow-[var(--shadow-card)] glow-card">
+                <img
+                  src={portraitTech}
+                  alt="Developer portrait with holographic code overlay"
+                  width={1024}
+                  height={1024}
+                  className="w-full h-full object-cover mix-blend-luminosity opacity-90"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-[var(--magenta)]/30 via-transparent to-[var(--neon)]/20" />
+                {/* Corner brackets */}
+                <Corner className="top-2 left-2" />
+                <Corner className="top-2 right-2 rotate-90" />
+                <Corner className="bottom-2 right-2 rotate-180" />
+                <Corner className="bottom-2 left-2 -rotate-90" />
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-3 font-mono text-[10px] uppercase tracking-widest">
+                <div className="px-3 py-2 rounded-md border border-border bg-card/50">
+                  <div className="text-muted-foreground">Location</div>
+                  <div className="text-[var(--neon)] mt-1">Lynwood, CA</div>
+                </div>
+                <div className="px-3 py-2 rounded-md border border-border bg-card/50">
+                  <div className="text-muted-foreground">Status</div>
+                  <div className="text-[var(--neon)] mt-1 flex items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--neon)] animate-pulse" />
+                    Active
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* ABOUT */}
+        {/* ABOUT / STATS */}
         <Section id="about" index="01" title="About">
-          <div className="grid md:grid-cols-12 gap-10">
-            <div className="md:col-span-7 space-y-6 text-lg leading-relaxed">
-              <p>
+          <div className="grid md:grid-cols-12 gap-8">
+            <div className="md:col-span-7 glow-card rounded-2xl p-8 space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-lg bg-[var(--neon)]/10 border border-[var(--neon)]/30 flex items-center justify-center">
+                  <Cpu className="h-5 w-5 text-[var(--neon)]" />
+                </div>
+                <h3 className="font-display text-2xl">Mission profile</h3>
+              </div>
+              <p className="text-base leading-relaxed text-foreground/90">
                 Expert in full-stack, desktop, web and mobile applications. I lead products
-                end-to-end — discovery, architecture, build, QA and delivery — with a strong
-                focus on performance, integrations and clean user experience.
+                end-to-end — discovery, architecture, build, QA and delivery — with a strong focus
+                on performance, integrations and clean user experience.
               </p>
-              <p className="text-muted-foreground">
-                Born July 13, 1980. Based in Lynwood, California. Bilingual (EN / ES) and
-                always learning the next thing.
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Born July 13, 1980. Based in Lynwood, California. Bilingual (EN / ES) and always
+                learning the next thing.
               </p>
             </div>
-            <dl className="md:col-span-5 grid grid-cols-2 gap-x-6 gap-y-8 text-sm">
-              <Stat k="22+" v="Years of experience" />
-              <Stat k="24" v="Projects delivered" />
-              <Stat k="10" v="Happy clients" />
-              <Stat k="∞" v="Cups of coffee" />
-            </dl>
+            <div className="md:col-span-5 grid grid-cols-2 gap-4">
+              <Stat icon={Briefcase} k="22+" v="Years experience" />
+              <Stat icon={Sparkles} k="24" v="Projects shipped" />
+              <Stat icon={Cloud} k="10+" v="Happy clients" />
+              <Stat icon={Terminal} k="∞" v="Lines of code" />
+            </div>
           </div>
         </Section>
 
         {/* EXPERIENCE */}
-        <Section id="experience" index="02" title="Experience">
-          <ol className="space-y-0">
-            {EXPERIENCE.map((e, i) => (
-              <li
-                key={i}
-                className="grid md:grid-cols-12 gap-6 py-8 border-t border-border first:border-t-0 group"
-              >
-                <div className="md:col-span-3 text-sm text-muted-foreground tracking-wide pt-2">
-                  {e.period}
-                </div>
-                <div className="md:col-span-9">
-                  <h3 className="font-display text-2xl group-hover:text-accent transition-colors">
-                    {e.role}
-                  </h3>
-                  <div className="text-sm text-muted-foreground mt-1">{e.company}</div>
-                  <p className="mt-3 text-base leading-relaxed">{e.description}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+        <Section id="experience" index="02" title="Experience timeline">
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[var(--neon)]/40 to-transparent" />
+
+            <ol className="space-y-10">
+              {EXPERIENCE.map((e, i) => {
+                const Icon = e.icon;
+                const left = i % 2 === 0;
+                return (
+                  <li
+                    key={i}
+                    className={`relative grid md:grid-cols-2 gap-8 items-center ${
+                      left ? "" : "md:[direction:rtl]"
+                    }`}
+                  >
+                    {/* Node */}
+                    <div className="absolute left-6 md:left-1/2 -translate-x-1/2 z-10">
+                      <div className="h-12 w-12 rounded-full bg-card border border-[var(--neon)]/50 flex items-center justify-center shadow-[var(--shadow-neon)]">
+                        <Icon className="h-5 w-5 text-[var(--neon)]" />
+                      </div>
+                    </div>
+
+                    <div className={`pl-20 md:pl-0 ${left ? "md:pr-16 md:text-right" : "md:pl-16 [direction:ltr]"}`}>
+                      <div className="font-mono text-xs uppercase tracking-widest text-[var(--neon)] mb-2">
+                        {e.period}
+                      </div>
+                      <h3 className="font-display text-2xl font-semibold">{e.role}</h3>
+                      <div className="text-sm text-muted-foreground mt-1">{e.company}</div>
+                      <p className="mt-3 text-sm text-foreground/80 leading-relaxed">
+                        {e.description}
+                      </p>
+                      <div
+                        className={`mt-4 flex flex-wrap gap-2 ${
+                          left ? "md:justify-end" : "md:justify-start"
+                        }`}
+                      >
+                        {e.tags.map((t) => (
+                          <span
+                            key={t}
+                            className="font-mono text-[10px] uppercase tracking-widest px-2 py-1 rounded border border-border text-muted-foreground"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="hidden md:block" />
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
         </Section>
 
-        {/* SKILLS + EDUCATION */}
-        <Section id="skills" index="03" title="Skills & Education">
-          <div className="grid md:grid-cols-12 gap-10">
-            <div className="md:col-span-7">
-              <h3 className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-6">
-                Stack
-              </h3>
-              <ul className="flex flex-wrap gap-2">
-                {SKILLS.map((s) => (
-                  <li
-                    key={s}
-                    className="text-sm border border-border rounded-full px-4 py-2 hover:border-accent hover:text-accent transition-colors"
-                  >
-                    {s}
-                  </li>
-                ))}
-              </ul>
+        {/* SKILLS */}
+        <Section id="skills" index="03" title="Tech stack">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {SKILL_GROUPS.map((g) => {
+              const Icon = g.icon;
+              return (
+                <div key={g.title} className="glow-card rounded-2xl p-6 group">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="h-10 w-10 rounded-lg bg-[var(--neon)]/10 border border-[var(--neon)]/30 flex items-center justify-center group-hover:bg-[var(--neon)]/20 transition-colors">
+                      <Icon className="h-5 w-5 text-[var(--neon)]" />
+                    </div>
+                    <h3 className="font-display text-lg font-semibold">{g.title}</h3>
+                  </div>
+                  <ul className="flex flex-wrap gap-2">
+                    {g.items.map((i) => (
+                      <li
+                        key={i}
+                        className="font-mono text-xs px-2.5 py-1 rounded-md bg-secondary/60 border border-border text-foreground/80"
+                      >
+                        {i}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Education strip */}
+          <div className="mt-12">
+            <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4">
+              // Education &amp; certifications
             </div>
-            <div className="md:col-span-5">
-              <h3 className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-6">
-                Education
-              </h3>
-              <ul className="space-y-5">
-                {EDUCATION.map((e) => (
-                  <li key={e.title}>
-                    <div className="font-display text-lg">{e.title}</div>
-                    <div className="text-sm text-muted-foreground">{e.place}</div>
-                  </li>
-                ))}
-              </ul>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {EDUCATION.map((e) => (
+                <div
+                  key={e.title}
+                  className="border border-border rounded-xl p-4 bg-card/40 hover:border-[var(--magenta)]/50 transition-colors"
+                >
+                  <div className="font-display text-sm font-semibold">{e.title}</div>
+                  <div className="text-xs text-muted-foreground mt-1">{e.place}</div>
+                </div>
+              ))}
             </div>
           </div>
         </Section>
 
         {/* PROJECTS */}
         <Section id="projects" index="04" title="Selected work">
-          <div className="grid sm:grid-cols-2 gap-px bg-border border border-border">
-            {PROJECTS.map((p) => (
-              <a
-                key={p.title}
-                href={p.href}
-                target="_blank"
-                rel="noreferrer"
-                className="bg-background p-8 group hover:bg-secondary transition-colors flex flex-col justify-between min-h-[180px]"
-              >
-                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  {p.tag}
-                </span>
-                <div className="flex items-end justify-between mt-10">
-                  <h3 className="font-display text-2xl">{p.title}</h3>
-                  <span className="text-accent text-2xl translate-x-0 group-hover:translate-x-1 transition-transform">
-                    ↗
-                  </span>
-                </div>
-              </a>
-            ))}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {PROJECTS.map((p) => {
+              const Icon = p.icon;
+              return (
+                <a
+                  key={p.title}
+                  href={p.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="glow-card rounded-2xl p-6 flex flex-col justify-between min-h-[200px] group"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="h-11 w-11 rounded-lg bg-gradient-to-br from-[var(--neon)]/20 to-[var(--magenta)]/20 border border-[var(--neon)]/30 flex items-center justify-center">
+                      <Icon className="h-5 w-5 text-[var(--neon)]" />
+                    </div>
+                    <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-[var(--neon)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  </div>
+                  <div className="mt-6">
+                    <div className="font-mono text-[10px] uppercase tracking-widest text-[var(--magenta)] mb-2">
+                      {p.tag}
+                    </div>
+                    <h3 className="font-display text-xl font-semibold leading-tight">
+                      {p.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{p.desc}</p>
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </Section>
 
         {/* CONTACT */}
-        <Section id="contact" index="05" title="Get in touch">
-          <div className="grid md:grid-cols-12 gap-10 items-end">
-            <div className="md:col-span-7">
-              <h3 className="font-display text-5xl sm:text-6xl leading-[1] text-balance">
-                Let's build something
-                <br />
-                <span className="italic font-light text-accent">worth shipping.</span>
-              </h3>
-            </div>
-            <div className="md:col-span-5 space-y-6 text-sm">
-              <ContactRow label="Email">
-                <a href="mailto:ruben.parrales@gmail.com" className="hover:text-accent">
+        <Section id="contact" index="05" title="Establish connection">
+          <div className="relative glow-card rounded-3xl p-8 sm:p-12 overflow-hidden">
+            <div
+              className="absolute -top-20 -right-20 h-64 w-64 rounded-full opacity-30 blur-3xl"
+              style={{ background: "var(--neon)" }}
+            />
+            <div
+              className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full opacity-30 blur-3xl"
+              style={{ background: "var(--magenta)" }}
+            />
+            <div className="relative grid md:grid-cols-12 gap-10 items-end">
+              <div className="md:col-span-7">
+                <div className="font-mono text-xs uppercase tracking-widest text-[var(--neon)] mb-4">
+                  // Open channel
+                </div>
+                <h3 className="font-display text-4xl sm:text-5xl font-bold leading-[1] text-balance">
+                  Let's build something
+                  <span className="block text-gradient-neon mt-2">worth shipping.</span>
+                </h3>
+              </div>
+              <div className="md:col-span-5 space-y-3">
+                <ContactRow icon={Mail} label="Email" href="mailto:ruben.parrales@gmail.com">
                   ruben.parrales@gmail.com
-                </a>
-              </ContactRow>
-              <ContactRow label="USA">
-                <a href="tel:+12135641434" className="hover:text-accent">
+                </ContactRow>
+                <ContactRow icon={Phone} label="USA" href="tel:+12135641434">
                   +1 (213) 564-1434
-                </a>
-              </ContactRow>
-              <ContactRow label="Costa Rica">
-                <a href="tel:+50661235401" className="hover:text-accent">
+                </ContactRow>
+                <ContactRow icon={Phone} label="Costa Rica" href="tel:+50661235401">
                   +506 6123-5401
-                </a>
-              </ContactRow>
-              <ContactRow label="Address">Lynwood, California — USA</ContactRow>
+                </ContactRow>
+                <ContactRow icon={MapPin} label="Address">
+                  Lynwood, California — USA
+                </ContactRow>
+              </div>
             </div>
           </div>
         </Section>
       </main>
 
-      <footer className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 sm:px-10 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <span>© {new Date().getFullYear()} Rubén Parrales. All rights reserved.</span>
-          <span className="font-display italic">Crafted with care.</span>
+      <footer className="relative border-t border-border/60 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-muted-foreground">
+          <span>
+            © {new Date().getFullYear()} Rubén Parrales · All systems operational
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--neon)] animate-pulse" />
+            v2.0 · built with care
+          </span>
         </div>
       </footer>
     </div>
@@ -317,31 +559,73 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="pt-32 scroll-mt-20">
-      <div className="flex items-baseline gap-6 mb-14">
-        <span className="text-xs tracking-[0.3em] text-muted-foreground">{index}</span>
-        <h2 className="font-display text-3xl sm:text-4xl">{title}</h2>
-        <span className="flex-1 h-px bg-border" />
+    <section id={id} className="pt-28 scroll-mt-20">
+      <div className="flex items-baseline gap-4 mb-12">
+        <span className="font-mono text-xs tracking-widest text-[var(--neon)]">
+          [{index}]
+        </span>
+        <h2 className="font-display text-3xl sm:text-4xl font-bold">{title}</h2>
+        <span className="flex-1 h-px bg-gradient-to-r from-[var(--neon)]/40 to-transparent" />
       </div>
       {children}
     </section>
   );
 }
 
-function Stat({ k, v }: { k: string; v: string }) {
+function Stat({
+  icon: Icon,
+  k,
+  v,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  k: string;
+  v: string;
+}) {
   return (
-    <div>
-      <dt className="font-display text-4xl">{k}</dt>
-      <dd className="text-muted-foreground mt-1">{v}</dd>
+    <div className="glow-card rounded-xl p-5">
+      <Icon className="h-4 w-4 text-[var(--neon)] mb-3" />
+      <div className="font-display text-3xl font-bold">{k}</div>
+      <div className="text-xs text-muted-foreground mt-1 font-mono uppercase tracking-widest">
+        {v}
+      </div>
     </div>
   );
 }
 
-function ContactRow({ label, children }: { label: string; children: React.ReactNode }) {
+function ContactRow({
+  icon: Icon,
+  label,
+  href,
+  children,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  href?: string;
+  children: React.ReactNode;
+}) {
+  const inner = (
+    <div className="flex items-center gap-4 p-3 rounded-lg border border-border bg-background/40 hover:border-[var(--neon)]/50 hover:bg-background/70 transition-all group">
+      <div className="h-9 w-9 rounded-md bg-[var(--neon)]/10 border border-[var(--neon)]/30 flex items-center justify-center">
+        <Icon className="h-4 w-4 text-[var(--neon)]" />
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+          {label}
+        </div>
+        <div className="text-sm truncate group-hover:text-[var(--neon)] transition-colors">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+  return href ? <a href={href}>{inner}</a> : inner;
+}
+
+function Corner({ className = "" }: { className?: string }) {
   return (
-    <div className="flex items-baseline justify-between gap-6 border-b border-border pb-4">
-      <span className="text-muted-foreground uppercase tracking-[0.2em] text-xs">{label}</span>
-      <span className="font-display text-lg text-right">{children}</span>
+    <div className={`absolute h-4 w-4 ${className}`}>
+      <div className="absolute top-0 left-0 h-full w-px bg-[var(--neon)]" />
+      <div className="absolute top-0 left-0 w-full h-px bg-[var(--neon)]" />
     </div>
   );
 }

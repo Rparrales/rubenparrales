@@ -225,7 +225,7 @@ function Index() {
       />
 
       {/* NAV */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/60 border-b border-border/60">
+      <header className="no-print fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/60 border-b border-border/60">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 h-16 flex items-center justify-between">
           <a href="#top" className="flex items-center gap-2 font-mono text-sm">
             <span className="relative flex h-2 w-2">
@@ -259,20 +259,33 @@ function Index() {
               <span className="text-muted-foreground/40">|</span>
               <span className={!isEs ? "text-[var(--neon)]" : "text-muted-foreground"}>EN</span>
             </button>
-            <a
-              href="https://rubenparrales.azurewebsites.net/docs/cv2021.pdf"
+            <button
+              type="button"
+              onClick={() => window.print()}
+              title={isEs ? "Imprimir / Guardar como PDF" : "Print / Save as PDF"}
+              aria-label={isEs ? "Imprimir / Guardar como PDF" : "Print / Save as PDF"}
               className="group inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest border border-[var(--neon)]/40 text-[var(--neon)] px-4 py-2 rounded-full hover:bg-[var(--neon)] hover:text-primary-foreground hover:shadow-[var(--shadow-neon)] transition-all"
             >
               <Download className="h-3.5 w-3.5" />
               CV
-            </a>
+            </button>
           </div>
         </div>
       </header>
 
       <main id="top" className="relative mx-auto max-w-7xl px-6 sm:px-10 pt-28 pb-32">
+        {/* PRINT-ONLY HEADER */}
+        <header className="print-only print-header">
+          <h1>Rubén Parrales</h1>
+          <div className="role">{t("hero.role")}</div>
+          <div className="contact">
+            ruben.parrales@gmail.com · +1 (213) 564-1434 · +506 6123-5401 · USA · CR · Lynwood, CA
+          </div>
+          <hr />
+        </header>
+
         {/* HERO */}
-        <section className="relative pt-10 pb-32">
+        <section className="no-print relative pt-10 pb-32">
           {/* Hero image backdrop */}
           <div className="absolute inset-0 -z-10 rounded-3xl overflow-hidden border border-border/60 scanline">
             <img
@@ -383,7 +396,18 @@ function Index() {
 
         {/* EXPERIENCE */}
         <Section id="experience" index="02" title={t("sections.experience")}>
-          <div className="relative">
+          {/* Print-only compact list */}
+          <ul className="print-only print-exp-list">
+            {EXPERIENCE.map((e, i) => (
+              <li key={i} className="print-exp-item">
+                <div className="print-exp-line">
+                  <strong>{e.period}</strong> · {e.company} · {e.role}
+                </div>
+                <p>{e.description}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="no-print relative">
             {/* Vertical line */}
             <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[var(--neon)]/40 to-transparent" />
 
@@ -486,7 +510,14 @@ function Index() {
 
         {/* PROJECTS */}
         <Section id="projects" index="04" title={t("sections.projects")}>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <ul className="print-only print-proj-list">
+            {PROJECTS.filter((p) => p.href && p.href !== "#").map((p) => (
+              <li key={p.title}>
+                <strong>{p.title}</strong> — <span>{p.href}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="no-print grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {PROJECTS.map((p) => {
               const Icon = p.icon;
               return (
@@ -558,7 +589,7 @@ function Index() {
         </Section>
       </main>
 
-      <footer className="relative border-t border-border/60 backdrop-blur-sm">
+      <footer className="no-print relative border-t border-border/60 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-muted-foreground">
           <span className="font-mono text-[11px] tracking-widest" style={{ color: "oklch(0.85 0.2 145)" }}>
             {t("footer.visitors")}: {visitors !== null ? String(visitors).padStart(8, "0") : "--------"}

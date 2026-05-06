@@ -550,7 +550,7 @@ function Index() {
         </Section>
 
         {/* CONTACT */}
-        <Section id="contact" index="05" title={t("sections.contact")}>
+        <Section id="contact" index="05" title={t("sections.contact")} className="no-print">
           <div className="relative glow-card rounded-3xl p-8 sm:p-12 overflow-hidden">
             <div
               className="absolute -top-20 -right-20 h-64 w-64 rounded-full opacity-30 blur-3xl"
@@ -612,14 +612,16 @@ function Section({
   index,
   title,
   children,
+  className = "",
 }: {
   id: string;
   index: string;
   title: string;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
-    <section id={id} className="pt-28 scroll-mt-20">
+    <section id={id} className={`pt-28 scroll-mt-20 ${className}`}>
       <div className="flex items-baseline gap-4 mb-12">
         <span className="font-mono text-xs tracking-widest text-[var(--neon)]">
           [{index}]

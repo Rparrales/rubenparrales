@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import "@/i18n";
 import {
   Cloud,
   Briefcase,
@@ -20,6 +22,7 @@ import {
   Sparkles,
   Terminal,
   Zap,
+  Languages,
 } from "lucide-react";
 import heroTech from "@/assets/hero-tech.jpg";
 import portraitTech from "@/assets/portrait-tech.jpg";
@@ -29,11 +32,11 @@ export const Route = createFileRoute("/")({
 });
 
 const NAV = [
-  { id: "about", label: "About" },
-  { id: "experience", label: "Experience" },
-  { id: "skills", label: "Stack" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
+  { id: "about", key: "nav.about" },
+  { id: "experience", key: "nav.experience" },
+  { id: "skills", key: "nav.skills" },
+  { id: "projects", key: "nav.projects" },
+  { id: "contact", key: "nav.contact" },
 ];
 
 const EXPERIENCE = [
@@ -179,6 +182,22 @@ const PROJECTS = [
 
 function Index() {
   const [active, setActive] = useState("about");
+  const { t, i18n } = useTranslation();
+  const [visitors, setVisitors] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch("https://abacus.jasoncameron.dev/hit/rubenparrales/home")
+      .then((r) => r.json())
+      .then((d) => typeof d?.value === "number" && setVisitors(d.value))
+      .catch(() => {});
+  }, []);
+
+  const toggleLang = () => {
+    const next = i18n.language?.startsWith("es") ? "en" : "es";
+    i18n.changeLanguage(next);
+    try { localStorage.setItem("lang", next); } catch {}
+  };
+  const isEs = i18n.language?.startsWith("es");
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -225,17 +244,29 @@ function Index() {
                 }`}
               >
                 <span className="text-[var(--neon)]/60 mr-1">0{i + 1}</span>
-                {n.label}
+                {t(n.key)}
               </a>
             ))}
           </nav>
-          <a
-            href="https://rubenparrales.azurewebsites.net/docs/cv2021.pdf"
-            className="group inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest border border-[var(--neon)]/40 text-[var(--neon)] px-4 py-2 rounded-full hover:bg-[var(--neon)] hover:text-primary-foreground hover:shadow-[var(--shadow-neon)] transition-all"
-          >
-            <Download className="h-3.5 w-3.5" />
-            CV
-          </a>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleLang}
+              aria-label="Toggle language"
+              className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest border border-border rounded-full px-2.5 py-1.5 hover:border-[var(--neon)]/60 transition-colors"
+            >
+              <Languages className="h-3 w-3 text-[var(--neon)]" />
+              <span className={isEs ? "text-[var(--neon)]" : "text-muted-foreground"}>ES</span>
+              <span className="text-muted-foreground/40">|</span>
+              <span className={!isEs ? "text-[var(--neon)]" : "text-muted-foreground"}>EN</span>
+            </button>
+            <a
+              href="https://rubenparrales.azurewebsites.net/docs/cv2021.pdf"
+              className="group inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest border border-[var(--neon)]/40 text-[var(--neon)] px-4 py-2 rounded-full hover:bg-[var(--neon)] hover:text-primary-foreground hover:shadow-[var(--shadow-neon)] transition-all"
+            >
+              <Download className="h-3.5 w-3.5" />
+              CV
+            </a>
+          </div>
         </div>
       </header>
 
@@ -258,20 +289,18 @@ function Index() {
             <div className="md:col-span-8 space-y-8">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--neon)]/40 bg-[var(--neon)]/5 font-mono text-xs uppercase tracking-widest text-[var(--neon)]">
                 <Zap className="h-3 w-3" />
-                System online · Available for freelance
+                {t("hero.status")}
               </div>
 
               <h1 className="font-display text-5xl sm:text-7xl md:text-8xl font-bold leading-[0.95] text-balance">
-                Rubén Parrales
-                <span className="block text-gradient-neon mt-2">Full Stack Engineer</span>
+                {t("hero.name")}
+                <span className="block text-gradient-neon mt-2 text-3xl sm:text-4xl md:text-5xl">{t("hero.role")}</span>
               </h1>
 
               <p className="font-mono text-sm text-muted-foreground max-w-xl leading-relaxed">
-                <span className="text-[var(--neon)]">$</span> 22+ years shipping software across
-                .NET, Azure, web &amp; mobile.
+                <span className="text-[var(--neon)]">$</span> {t("hero.subtitle1")}
                 <br />
-                <span className="text-[var(--neon)]">$</span> Building bank integrations, APIs,
-                e-commerce &amp; native apps.
+                <span className="text-[var(--neon)]">$</span> {t("hero.subtitle2")}
                 <span className="animate-blink ml-1 text-[var(--neon)]">▍</span>
               </p>
 
@@ -281,14 +310,14 @@ function Index() {
                   className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--neon)] text-primary-foreground font-medium hover:shadow-[var(--shadow-neon)] transition-all"
                 >
                   <Terminal className="h-4 w-4" />
-                  Initiate contact
+                  {t("hero.ctaContact")}
                   <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
                 <a
                   href="#projects"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border hover:border-[var(--magenta)] hover:text-[var(--magenta)] transition-colors"
                 >
-                  View projects
+                  {t("hero.ctaProjects")}
                 </a>
               </div>
             </div>
@@ -311,14 +340,14 @@ function Index() {
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3 font-mono text-[10px] uppercase tracking-widest">
                 <div className="px-3 py-2 rounded-md border border-border bg-card/50">
-                  <div className="text-muted-foreground">Location</div>
+                  <div className="text-muted-foreground">{t("hero.location")}</div>
                   <div className="text-[var(--neon)] mt-1">Lynwood, CA</div>
                 </div>
                 <div className="px-3 py-2 rounded-md border border-border bg-card/50">
-                  <div className="text-muted-foreground">Status</div>
+                  <div className="text-muted-foreground">{t("hero.statusLabel")}</div>
                   <div className="text-[var(--neon)] mt-1 flex items-center gap-1.5">
                     <span className="h-1.5 w-1.5 rounded-full bg-[var(--neon)] animate-pulse" />
-                    Active
+                    {t("hero.active")}
                   </div>
                 </div>
               </div>
@@ -327,36 +356,33 @@ function Index() {
         </section>
 
         {/* ABOUT / STATS */}
-        <Section id="about" index="01" title="About">
+        <Section id="about" index="01" title={t("nav.about")}>
           <div className="grid md:grid-cols-12 gap-8">
             <div className="md:col-span-7 glow-card rounded-2xl p-8 space-y-5">
               <div className="flex items-center gap-3">
                 <div className="h-10 w-10 rounded-lg bg-[var(--neon)]/10 border border-[var(--neon)]/30 flex items-center justify-center">
                   <Cpu className="h-5 w-5 text-[var(--neon)]" />
                 </div>
-                <h3 className="font-display text-2xl">Mission profile</h3>
+                <h3 className="font-display text-2xl">{t("about.mission")}</h3>
               </div>
               <p className="text-base leading-relaxed text-foreground/90">
-                Expert in full-stack, desktop, web and mobile applications. I lead products
-                end-to-end — discovery, architecture, build, QA and delivery — with a strong focus
-                on performance, integrations and clean user experience.
+                {t("about.p1")}
               </p>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Born July 13, 1980. Based in Lynwood, California. Bilingual (EN / ES) and always
-                learning the next thing.
+                {t("about.p2")}
               </p>
             </div>
             <div className="md:col-span-5 grid grid-cols-2 gap-4">
-              <Stat icon={Briefcase} k="22+" v="Years experience" />
-              <Stat icon={Sparkles} k="24" v="Projects shipped" />
-              <Stat icon={Cloud} k="10+" v="Happy clients" />
-              <Stat icon={Terminal} k="∞" v="Lines of code" />
+              <Stat icon={Briefcase} k="22+" v={t("about.stats.years")} />
+              <Stat icon={Sparkles} k="24" v={t("about.stats.projects")} />
+              <Stat icon={Cloud} k="10+" v={t("about.stats.clients")} />
+              <Stat icon={Terminal} k="∞" v={t("about.stats.code")} />
             </div>
           </div>
         </Section>
 
         {/* EXPERIENCE */}
-        <Section id="experience" index="02" title="Experience timeline">
+        <Section id="experience" index="02" title={t("sections.experience")}>
           <div className="relative">
             {/* Vertical line */}
             <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[var(--neon)]/40 to-transparent" />
@@ -412,7 +438,7 @@ function Index() {
         </Section>
 
         {/* SKILLS */}
-        <Section id="skills" index="03" title="Tech stack">
+        <Section id="skills" index="03" title={t("sections.stack")}>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {SKILL_GROUPS.map((g) => {
               const Icon = g.icon;
@@ -442,7 +468,7 @@ function Index() {
           {/* Education strip */}
           <div className="mt-12">
             <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4">
-              // Education &amp; certifications
+              // {t("sections.education")}
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {EDUCATION.map((e) => (
@@ -459,7 +485,7 @@ function Index() {
         </Section>
 
         {/* PROJECTS */}
-        <Section id="projects" index="04" title="Selected work">
+        <Section id="projects" index="04" title={t("sections.projects")}>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {PROJECTS.map((p) => {
               const Icon = p.icon;
@@ -493,7 +519,7 @@ function Index() {
         </Section>
 
         {/* CONTACT */}
-        <Section id="contact" index="05" title="Establish connection">
+        <Section id="contact" index="05" title={t("sections.contact")}>
           <div className="relative glow-card rounded-3xl p-8 sm:p-12 overflow-hidden">
             <div
               className="absolute -top-20 -right-20 h-64 w-64 rounded-full opacity-30 blur-3xl"
@@ -506,25 +532,25 @@ function Index() {
             <div className="relative grid md:grid-cols-12 gap-10 items-end">
               <div className="md:col-span-7">
                 <div className="font-mono text-xs uppercase tracking-widest text-[var(--neon)] mb-4">
-                  // Open channel
+                  // {t("contact.openChannel")}
                 </div>
                 <h3 className="font-display text-4xl sm:text-5xl font-bold leading-[1] text-balance">
-                  Let's build something
-                  <span className="block text-gradient-neon mt-2">worth shipping.</span>
+                  {t("contact.headline1")}
+                  <span className="block text-gradient-neon mt-2">{t("contact.headline2")}</span>
                 </h3>
               </div>
               <div className="md:col-span-5 space-y-3">
-                <ContactRow icon={Mail} label="Email" href="mailto:ruben.parrales@gmail.com">
+                <ContactRow icon={Mail} label={t("contact.email")} href="mailto:ruben.parrales@gmail.com">
                   ruben.parrales@gmail.com
                 </ContactRow>
-                <ContactRow icon={Phone} label="USA" href="tel:+12135641434">
+                <ContactRow icon={Phone} label={t("contact.usa")} href="tel:+12135641434">
                   +1 (213) 564-1434
                 </ContactRow>
-                <ContactRow icon={Phone} label="Costa Rica" href="tel:+50661235401">
+                <ContactRow icon={Phone} label={t("contact.work")} href="tel:+50661235401">
                   +506 6123-5401
                 </ContactRow>
-                <ContactRow icon={MapPin} label="Address">
-                  Lynwood, California — USA
+                <ContactRow icon={MapPin} label={t("contact.address")}>
+                  {t("contact.addressValue")}
                 </ContactRow>
               </div>
             </div>
@@ -534,12 +560,15 @@ function Index() {
 
       <footer className="relative border-t border-border/60 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-muted-foreground">
+          <span className="font-mono text-[11px] tracking-widest" style={{ color: "oklch(0.85 0.2 145)" }}>
+            {t("footer.visitors")}: {visitors !== null ? String(visitors).padStart(8, "0") : "--------"}
+          </span>
           <span>
-            © {new Date().getFullYear()} Rubén Parrales · All systems operational
+            © {new Date().getFullYear()} Rubén Parrales · {t("footer.ops")}
           </span>
           <span className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--neon)] animate-pulse" />
-            v2.0 · built with care
+            v2.0 · {t("footer.built")}
           </span>
         </div>
       </footer>

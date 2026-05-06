@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "skills": "Stack",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "status": "Sistema en línea · Disponible para proyectos",
+    "name": "Rubén Parrales",
+    "role": "Arquitecto de Software · Gerente de TI · Desarrollador Aumentado con IA",
+    "subtitle1": "30+ años desarrollando software en .NET, Azure, web y móvil.",
+    "subtitle2": "Integraciones bancarias, APIs, e-commerce y apps nativas.",
+    "ctaContact": "Contactar",
+    "ctaProjects": "Ver proyectos",
+    "location": "Ubicación",
+    "statusLabel": "Estado",
+    "active": "Activo"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "mission": "Perfil profesional",
+    "p1": "Experto en aplicaciones full-stack, escritorio, web y móvil. Lidero productos de extremo a extremo — descubrimiento, arquitectura, desarrollo, QA y entrega — con fuerte foco en rendimiento, integraciones y experiencia de usuario.",
+    "p2": "Nacido el 13 de julio de 1980. Radicado en Lynwood, California. Bilingüe (EN / ES) y siempre aprendiendo lo siguiente.",
+    "stats": {
+      "years": "Años de experiencia",
+      "projects": "Proyectos entregados",
+      "clients": "Clientes satisfechos",
+      "code": "Líneas de código"
+    }
+  },
+  "sections": {
+    "experience": "Trayectoria profesional",
+    "stack": "Stack tecnológico",
+    "projects": "Proyectos destacados",
+    "contact": "Conectemos",
+    "education": "Educación y certificaciones"
+  },
+  "contact": {
+    "openChannel": "Canal abierto",
+    "headline1": "Construyamos algo",
+    "headline2": "que valga la pena.",
+    "email": "Correo",
+    "address": "Dirección",
+    "work": "Trabajo",
+    "usa": "EE.UU.",
+    "addressValue": "Lynwood, California — EE.UU."
+  },
+  "footer": {
+    "ops": "Todos los sistemas operativos",
+    "built": "hecho con dedicación",
+    "visitors": "VISITAS"
+  }
+}

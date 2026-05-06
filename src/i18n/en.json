@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "skills": "Stack",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "status": "System online · Available for freelance",
+    "name": "Rubén Parrales",
+    "role": "Software Architect · IT Manager · AI-Augmented Developer",
+    "subtitle1": "30+ years shipping software across .NET, Azure, web & mobile.",
+    "subtitle2": "Building bank integrations, APIs, e-commerce & native apps.",
+    "ctaContact": "Initiate contact",
+    "ctaProjects": "View projects",
+    "location": "Location",
+    "statusLabel": "Status",
+    "active": "Active"
+  },
+  "about": {
+    "title": "About",
+    "mission": "Mission profile",
+    "p1": "Expert in full-stack, desktop, web and mobile applications. I lead products end-to-end — discovery, architecture, build, QA and delivery — with a strong focus on performance, integrations and clean user experience.",
+    "p2": "Born July 13, 1980. Based in Lynwood, California. Bilingual (EN / ES) and always learning the next thing.",
+    "stats": {
+      "years": "Years experience",
+      "projects": "Projects shipped",
+      "clients": "Happy clients",
+      "code": "Lines of code"
+    }
+  },
+  "sections": {
+    "experience": "Experience timeline",
+    "stack": "Tech stack",
+    "projects": "Selected work",
+    "contact": "Establish connection",
+    "education": "Education & certifications"
+  },
+  "contact": {
+    "openChannel": "Open channel",
+    "headline1": "Let's build something",
+    "headline2": "worth shipping.",
+    "email": "Email",
+    "address": "Address",
+    "work": "Work",
+    "usa": "USA",
+    "addressValue": "Lynwood, California — USA"
+  },
+  "footer": {
+    "ops": "All systems operational",
+    "built": "built with care",
+    "visitors": "VISITORS"
+  }
+}

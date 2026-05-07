@@ -279,7 +279,7 @@ function Index() {
           <h1>Rubén Parrales</h1>
           <div className="role">{t("hero.role")}</div>
           <div className="contact">
-            ruben.parrales@gmail.com · +1 (213) 564-1434 · +506 6123-5401 · USA · CR · Lynwood, CA
+            ruben.parrales@gmail.com · +1 (323) 636-3684 · +506 6123-5401 · USA · CR · Lynwood, CA
           </div>
           <hr />
         </header>
@@ -574,8 +574,8 @@ function Index() {
                 <ContactRow icon={Mail} label={t("contact.email")} href="mailto:ruben.parrales@gmail.com">
                   ruben.parrales@gmail.com
                 </ContactRow>
-                <ContactRow icon={Phone} label={t("contact.usa")} href="tel:+12135641434">
-                  +1 (213) 564-1434
+                <ContactRow icon={Phone} label={t("contact.usa")} href="tel:+13236363684">
+                  +1 (323) 636-3684
                 </ContactRow>
                 <ContactRow icon={Phone} label={t("contact.work")} href="tel:+50661235401">
                   +506 6123-5401

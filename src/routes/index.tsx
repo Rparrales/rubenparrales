@@ -138,17 +138,17 @@ const SKILL_GROUPS = [
 const PROJECTS = [
   {
     title: "REST API · Integrations",
-    href: "https://wscbsecommerce.azurewebsites.net/",
+    href: "https://wscbsecommerce.azurewebsites.net/swagger/index.html",
     tag: "Backend",
     icon: Server,
-    desc: "Bank & e-commerce integrations exposed as scalable APIs.",
+    desc: "Bank & e-commerce integrations exposed as scalable APIs — Swagger documented.",
   },
   {
     title: "E-commerce Platform",
-    href: "https://tienda.cbs.cr/",
+    href: "https://play.google.com/store/apps/details?id=cr.co.cbs.sifo",
     tag: "Web",
     icon: Globe,
-    desc: "Full storefront with payments, catalog and POS sync.",
+    desc: "Storefront stack with payments, catalog and POS sync (nopCommerce + .NET).",
   },
   {
     title: "SIFO Mobile App",

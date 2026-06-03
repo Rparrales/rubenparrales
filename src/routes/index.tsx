@@ -199,6 +199,13 @@ function Index() {
   };
   const isEs = i18n.language?.startsWith("es");
 
+  // Keep <html lang> in sync with i18n for screen readers + SEO
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = isEs ? "es" : "en";
+    }
+  }, [isEs]);
+
   useEffect(() => {
     const obs = new IntersectionObserver(
       (entries) => {

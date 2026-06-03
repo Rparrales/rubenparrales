@@ -145,7 +145,7 @@ const PROJECTS = [
   },
   {
     title: "E-commerce Platform",
-    href: "https://play.google.com/store/apps/details?id=cr.co.cbs.sifo",
+    href: "#",
     tag: "Web",
     icon: Globe,
     desc: "Storefront stack with payments, catalog and POS sync (nopCommerce + .NET).",

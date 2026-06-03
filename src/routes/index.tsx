@@ -438,9 +438,9 @@ function Index() {
                     </div>
 
                     <div className={`pl-20 md:pl-0 ${left ? "md:pr-16 md:text-right" : "md:pl-16 [direction:ltr]"}`}>
-                      <div className="font-mono text-xs uppercase tracking-widest text-[var(--neon)] mb-2">
+                      <time className="block font-mono text-xs uppercase tracking-widest text-[var(--neon)] mb-2">
                         {e.period}
-                      </div>
+                      </time>
                       <h3 className="font-display text-2xl font-semibold">{e.role}</h3>
                       <div className="text-sm text-muted-foreground mt-1">{e.company}</div>
                       <p className="mt-3 text-sm text-foreground/80 leading-relaxed">

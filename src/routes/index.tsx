@@ -528,19 +528,25 @@ function Index() {
           <div className="no-print grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {PROJECTS.map((p) => {
               const Icon = p.icon;
+              const isLive = p.href && p.href !== "#";
               return (
                 <a
                   key={p.title}
-                  href={p.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="glow-card rounded-2xl p-6 flex flex-col justify-between min-h-[200px] group"
+                  href={isLive ? p.href : undefined}
+                  target={isLive ? "_blank" : undefined}
+                  rel={isLive ? "noreferrer" : undefined}
+                  aria-disabled={!isLive}
+                  className={`glow-card rounded-2xl p-6 flex flex-col justify-between min-h-[200px] group ${
+                    !isLive ? "cursor-default opacity-90" : ""
+                  }`}
                 >
                   <div className="flex items-start justify-between">
                     <div className="h-11 w-11 rounded-lg bg-gradient-to-br from-[var(--neon)]/20 to-[var(--magenta)]/20 border border-[var(--neon)]/30 flex items-center justify-center">
-                      <Icon className="h-5 w-5 text-[var(--neon)]" />
+                      <Icon className="h-5 w-5 text-[var(--neon)]" aria-hidden="true" />
                     </div>
-                    <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-[var(--neon)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    {isLive && (
+                      <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-[var(--neon)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" aria-hidden="true" />
+                    )}
                   </div>
                   <div className="mt-6">
                     <div className="font-mono text-[10px] uppercase tracking-widest text-[var(--magenta)] mb-2">

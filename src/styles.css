@@ -91,7 +91,16 @@
     background-image:
       radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.3 0.15 280 / 0.35), transparent 60%),
       radial-gradient(ellipse 60% 40% at 90% 30%, oklch(0.5 0.2 195 / 0.12), transparent 60%);
-    background-attachment: fixed;
+  }
+
+  /* Respect user motion preference — kills GPU-draining animations on battery devices */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
   }
 
   h1, h2, h3, h4 {
@@ -121,7 +130,6 @@
   .glow-card {
     position: relative;
     background: linear-gradient(180deg, oklch(0.18 0.03 265 / 0.6), oklch(0.15 0.025 265 / 0.4));
-    backdrop-filter: blur(10px);
     border: 1px solid oklch(0.3 0.03 265);
     transition: all 0.3s ease;
   }
@@ -155,7 +163,10 @@
     0% { transform: translateY(-100%); }
     100% { transform: translateY(100vh); }
   }
-  .animate-scan { animation: scan 8s linear infinite; }
+  .animate-scan {
+    animation: scan 14s linear infinite;
+    will-change: transform;
+  }
 
   @keyframes blink {
     0%, 49% { opacity: 1; }
@@ -170,7 +181,7 @@
 @media print {
   @page {
     size: A4 portrait;
-    margin: 15mm;
+    margin: 12mm 14mm;
     @bottom-right {
       content: "rubenparrales.com · " counter(page) " / " counter(pages);
       font-family: Georgia, "Times New Roman", serif;
@@ -183,8 +194,8 @@
     background: #fff !important;
     color: #000 !important;
     font-family: Georgia, "Times New Roman", serif !important;
-    font-size: 10.5pt !important;
-    line-height: 1.45 !important;
+    font-size: 9.5pt !important;
+    line-height: 1.35 !important;
   }
 
   body * {
@@ -210,68 +221,86 @@
   main {
     padding: 0 !important;
     max-width: 100% !important;
+    margin: 0 !important;
   }
 
   .print-only { display: block !important; }
   ul.print-only { display: block !important; }
 
+  /* Kill all decorative padding/margins from the web layout */
+  main > section,
+  main section[id] {
+    padding: 0 !important;
+    margin: 0 0 4mm 0 !important;
+    scroll-margin: 0 !important;
+  }
+
+  /* Remove the heavy hero spacing the web uses */
+  .pt-28, .pt-10, .pb-32, .py-16, .md\:py-24 { padding: 0 !important; }
+
   .print-header {
-    margin-bottom: 8mm;
-    padding-bottom: 4mm;
+    margin-bottom: 5mm;
+    padding-bottom: 3mm;
   }
   .print-header h1 {
     font-family: Georgia, serif !important;
-    font-size: 26pt;
+    font-size: 22pt;
     font-weight: 700;
-    margin: 0 0 2mm 0;
+    margin: 0 0 1.5mm 0;
     letter-spacing: 0;
   }
   .print-header .role {
-    font-size: 12pt;
+    font-size: 11pt;
     font-style: italic;
-    margin-bottom: 3mm;
+    margin-bottom: 2mm;
   }
   .print-header .contact {
-    font-size: 10pt;
+    font-size: 9pt;
     color: #333 !important;
   }
   .print-header hr {
-    margin-top: 4mm;
+    margin-top: 3mm;
     border: none;
     border-top: 1px solid #000;
   }
 
   section {
-    padding-top: 6mm !important;
     page-break-inside: auto;
+    break-inside: auto;
   }
 
   h2 {
     font-family: Georgia, serif !important;
-    font-size: 14pt !important;
+    font-size: 12pt !important;
     font-weight: 700;
-    margin: 4mm 0 3mm 0 !important;
+    margin: 3mm 0 2mm 0 !important;
     border-bottom: 1px solid #000;
     padding-bottom: 1mm;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    page-break-after: avoid;
+    break-after: avoid;
   }
 
-  h3 { font-size: 11pt !important; font-family: Georgia, serif !important; }
-  p { margin: 1mm 0 2mm 0; }
+  h3 { font-size: 10.5pt !important; font-family: Georgia, serif !important; page-break-after: avoid; }
+  p { margin: 0.5mm 0 1.5mm 0; orphans: 3; widows: 3; }
 
   /* Experience compact list */
   .print-exp-list { list-style: none; padding: 0; margin: 0; }
   .print-exp-item {
     page-break-inside: avoid;
     break-inside: avoid;
-    margin-bottom: 4mm;
+    margin-bottom: 2.5mm;
   }
-  .print-exp-line { font-size: 10.5pt; margin-bottom: 1mm; }
-  .print-exp-item p { font-size: 10pt; margin: 0; color: #222 !important; }
+  .print-exp-line { font-size: 10pt; margin-bottom: 0.5mm; }
+  .print-exp-item p { font-size: 9.5pt; margin: 0; color: #222 !important; }
 
   /* Projects */
   .print-proj-list { list-style: disc; padding-left: 5mm; margin: 0; }
-  .print-proj-list li { font-size: 10pt; margin-bottom: 1.5mm; page-break-inside: avoid; }
+  .print-proj-list li { font-size: 9.5pt; margin-bottom: 1mm; page-break-inside: avoid; break-inside: avoid; }
   .print-proj-list span { font-family: "Courier New", monospace; font-size: 9pt; color: #333 !important; }
+
+  /* Prevent the last page from being a near-empty page */
+  footer, header.no-print { display: none !important; }
+  main { page-break-after: avoid; break-after: avoid; }
 }

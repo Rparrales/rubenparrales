@@ -138,17 +138,17 @@ const SKILL_GROUPS = [
 const PROJECTS = [
   {
     title: "REST API · Integrations",
-    href: "https://wscbsecommerce.azurewebsites.net/",
+    href: "https://wscbsecommerce.azurewebsites.net/swagger/index.html",
     tag: "Backend",
     icon: Server,
-    desc: "Bank & e-commerce integrations exposed as scalable APIs.",
+    desc: "Bank & e-commerce integrations exposed as scalable APIs — Swagger documented.",
   },
   {
     title: "E-commerce Platform",
-    href: "https://tienda.cbs.cr/",
+    href: "#",
     tag: "Web",
     icon: Globe,
-    desc: "Full storefront with payments, catalog and POS sync.",
+    desc: "Storefront stack with payments, catalog and POS sync (nopCommerce + .NET).",
   },
   {
     title: "SIFO Mobile App",
@@ -198,6 +198,13 @@ function Index() {
     try { localStorage.setItem("lang", next); } catch {}
   };
   const isEs = i18n.language?.startsWith("es");
+
+  // Keep <html lang> in sync with i18n for screen readers + SEO
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = isEs ? "es" : "en";
+    }
+  }, [isEs]);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -252,11 +259,12 @@ function Index() {
             <button
               onClick={toggleLang}
               aria-label="Toggle language"
+              aria-pressed={isEs}
               className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest border border-border rounded-full px-2.5 py-1.5 hover:border-[var(--neon)]/60 transition-colors"
             >
-              <Languages className="h-3 w-3 text-[var(--neon)]" />
+              <Languages className="h-3 w-3 text-[var(--neon)]" aria-hidden="true" />
               <span className={isEs ? "text-[var(--neon)]" : "text-muted-foreground"}>ES</span>
-              <span className="text-muted-foreground/40">|</span>
+              <span className="text-muted-foreground/40" aria-hidden="true">|</span>
               <span className={!isEs ? "text-[var(--neon)]" : "text-muted-foreground"}>EN</span>
             </button>
             <button
@@ -311,10 +319,10 @@ function Index() {
               </h1>
 
               <p className="font-mono text-sm text-muted-foreground max-w-xl leading-relaxed">
-                <span className="text-[var(--neon)]">$</span> {t("hero.subtitle1")}
+                <span className="text-[var(--neon)]" aria-hidden="true">$</span> {t("hero.subtitle1")}
                 <br />
-                <span className="text-[var(--neon)]">$</span> {t("hero.subtitle2")}
-                <span className="animate-blink ml-1 text-[var(--neon)]">▍</span>
+                <span className="text-[var(--neon)]" aria-hidden="true">$</span> {t("hero.subtitle2")}
+                <span className="animate-blink ml-1 text-[var(--neon)]" aria-hidden="true">▍</span>
               </p>
 
               <div className="flex flex-wrap gap-3 pt-2">
@@ -430,9 +438,9 @@ function Index() {
                     </div>
 
                     <div className={`pl-20 md:pl-0 ${left ? "md:pr-16 md:text-right" : "md:pl-16 [direction:ltr]"}`}>
-                      <div className="font-mono text-xs uppercase tracking-widest text-[var(--neon)] mb-2">
+                      <time className="block font-mono text-xs uppercase tracking-widest text-[var(--neon)] mb-2">
                         {e.period}
-                      </div>
+                      </time>
                       <h3 className="font-display text-2xl font-semibold">{e.role}</h3>
                       <div className="text-sm text-muted-foreground mt-1">{e.company}</div>
                       <p className="mt-3 text-sm text-foreground/80 leading-relaxed">
@@ -520,19 +528,25 @@ function Index() {
           <div className="no-print grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {PROJECTS.map((p) => {
               const Icon = p.icon;
+              const isLive = p.href && p.href !== "#";
               return (
                 <a
                   key={p.title}
-                  href={p.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="glow-card rounded-2xl p-6 flex flex-col justify-between min-h-[200px] group"
+                  href={isLive ? p.href : undefined}
+                  target={isLive ? "_blank" : undefined}
+                  rel={isLive ? "noreferrer" : undefined}
+                  aria-disabled={!isLive}
+                  className={`glow-card rounded-2xl p-6 flex flex-col justify-between min-h-[200px] group ${
+                    !isLive ? "cursor-default opacity-90" : ""
+                  }`}
                 >
                   <div className="flex items-start justify-between">
                     <div className="h-11 w-11 rounded-lg bg-gradient-to-br from-[var(--neon)]/20 to-[var(--magenta)]/20 border border-[var(--neon)]/30 flex items-center justify-center">
-                      <Icon className="h-5 w-5 text-[var(--neon)]" />
+                      <Icon className="h-5 w-5 text-[var(--neon)]" aria-hidden="true" />
                     </div>
-                    <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-[var(--neon)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    {isLive && (
+                      <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-[var(--neon)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" aria-hidden="true" />
+                    )}
                   </div>
                   <div className="mt-6">
                     <div className="font-mono text-[10px] uppercase tracking-widest text-[var(--magenta)] mb-2">

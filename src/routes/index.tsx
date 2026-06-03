@@ -259,11 +259,12 @@ function Index() {
             <button
               onClick={toggleLang}
               aria-label="Toggle language"
+              aria-pressed={isEs}
               className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest border border-border rounded-full px-2.5 py-1.5 hover:border-[var(--neon)]/60 transition-colors"
             >
-              <Languages className="h-3 w-3 text-[var(--neon)]" />
+              <Languages className="h-3 w-3 text-[var(--neon)]" aria-hidden="true" />
               <span className={isEs ? "text-[var(--neon)]" : "text-muted-foreground"}>ES</span>
-              <span className="text-muted-foreground/40">|</span>
+              <span className="text-muted-foreground/40" aria-hidden="true">|</span>
               <span className={!isEs ? "text-[var(--neon)]" : "text-muted-foreground"}>EN</span>
             </button>
             <button
@@ -318,10 +319,10 @@ function Index() {
               </h1>
 
               <p className="font-mono text-sm text-muted-foreground max-w-xl leading-relaxed">
-                <span className="text-[var(--neon)]">$</span> {t("hero.subtitle1")}
+                <span className="text-[var(--neon)]" aria-hidden="true">$</span> {t("hero.subtitle1")}
                 <br />
-                <span className="text-[var(--neon)]">$</span> {t("hero.subtitle2")}
-                <span className="animate-blink ml-1 text-[var(--neon)]">▍</span>
+                <span className="text-[var(--neon)]" aria-hidden="true">$</span> {t("hero.subtitle2")}
+                <span className="animate-blink ml-1 text-[var(--neon)]" aria-hidden="true">▍</span>
               </p>
 
               <div className="flex flex-wrap gap-3 pt-2">

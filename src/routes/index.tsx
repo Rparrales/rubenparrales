@@ -425,7 +425,29 @@ function Index() {
               <Stat icon={Terminal} k="∞" v={t("about.stats.code")} />
             </div>
           </div>
+
+          {/* Engagement terms */}
+          <div className="no-print mt-8 glow-card rounded-2xl p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-10 w-10 rounded-lg bg-[var(--neon)]/10 border border-[var(--neon)]/30 flex items-center justify-center">
+                <Zap className="h-5 w-5 text-[var(--neon)]" aria-hidden="true" />
+              </div>
+              <h3 className="font-display text-2xl">{t("about.engagement.title")}</h3>
+            </div>
+            <ul className="grid sm:grid-cols-2 gap-4">
+              {ENGAGEMENT.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <li key={item.key} className="flex items-start gap-3">
+                    <Icon className="h-5 w-5 text-[var(--neon)] mt-0.5 shrink-0" aria-hidden="true" />
+                    <span className="text-sm text-foreground/80 leading-relaxed">{t(item.key)}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </Section>
+
 
         {/* EXPERIENCE */}
         <Section id="experience" index="02" title={t("sections.experience")}>

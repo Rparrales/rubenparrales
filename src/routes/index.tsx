@@ -186,7 +186,17 @@ const PROJECTS = [
   },
 ];
 
+const ENGAGEMENT = [
+  { icon: DollarSign, key: "about.engagement.salary" },
+  { icon: Globe, key: "about.engagement.remote" },
+  { icon: Clock, key: "about.engagement.time" },
+  { icon: BrainCircuit, key: "about.engagement.aiRoi" },
+  { icon: Workflow, key: "about.engagement.automation" },
+  { icon: FileText, key: "about.engagement.visa" },
+];
+
 function Index() {
+
   const [active, setActive] = useState("about");
   const { t, i18n } = useTranslation();
   const [visitors, setVisitors] = useState<number | null>(null);

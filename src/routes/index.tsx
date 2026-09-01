@@ -314,7 +314,11 @@ function Index() {
           <div className="contact">
             ruben.parrales@gmail.com · +1 (323) 636-3684 · +506 6123-5401 · USA · CR · Lynwood, CA
           </div>
+          <div className="print-only terms-line" style={{ fontSize: "9pt", marginTop: "2mm", color: "#333" }}>
+            {t("about.engagement.printSummary")}
+          </div>
           <hr />
+
         </header>
 
         {/* HERO */}

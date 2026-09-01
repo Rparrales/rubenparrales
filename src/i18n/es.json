@@ -28,6 +28,16 @@
       "projects": "Proyectos entregados",
       "clients": "Clientes satisfechos",
       "code": "Líneas de código"
+    },
+    "engagement": {
+      "title": "Términos de colaboración",
+      "salary": "Pretensión salarial: USD $5,000 al mes.",
+      "remote": "Solo remoto. Sin trabajo presencial.",
+      "time": "Disponible el tiempo que el proyecto requiera.",
+      "aiRoi": "Aplicaciones con IA que han generado retornos del 35% o más para empresas.",
+      "automation": "Automatización de flujos de trabajo para reducir costos y trabajo manual.",
+      "visa": "Para empresas de EE.UU.: no requiero visa; trabajo remoto como contratista independiente.",
+      "printSummary": "Solo remoto · USD $5,000/mes · IA con retorno 35%+ · No se requiere visa (EE.UU.)"
     }
   },
   "sections": {

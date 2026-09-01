@@ -42,13 +42,22 @@ export const Route = createRootRoute({
         content: "22+ years building web, mobile and enterprise software with .NET, Azure and modern web stacks.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3f2d2e90-680d-43c3-b1b6-8149af4b22b8/id-preview-31f552a2--4011d8f7-7504-4ed6-8bc6-a8ac01b9d572.lovable.app-1776396085347.png",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Rubén Parrales — Full Stack Developer" },
-      { name: "description", content: "CV Refresh Hub modernizes your resume with a sleek, editorial design and dynamic visual elements." },
-      { property: "og:description", content: "CV Refresh Hub modernizes your resume with a sleek, editorial design and dynamic visual elements." },
-      { name: "twitter:description", content: "CV Refresh Hub modernizes your resume with a sleek, editorial design and dynamic visual elements." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3f2d2e90-680d-43c3-b1b6-8149af4b22b8/id-preview-31f552a2--4011d8f7-7504-4ed6-8bc6-a8ac01b9d572.lovable.app-1776396085347.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3f2d2e90-680d-43c3-b1b6-8149af4b22b8/id-preview-31f552a2--4011d8f7-7504-4ed6-8bc6-a8ac01b9d572.lovable.app-1776396085347.png" },
+      {
+        name: "twitter:description",
+        content: "22+ years building web, mobile and enterprise software with .NET, Azure and modern web stacks.",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3f2d2e90-680d-43c3-b1b6-8149af4b22b8/id-preview-31f552a2--4011d8f7-7504-4ed6-8bc6-a8ac01b9d572.lovable.app-1776396085347.png",
+      },
     ],
     links: [
       {

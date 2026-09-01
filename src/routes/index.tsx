@@ -222,6 +222,15 @@ function Index() {
     }
   }, [isEs]);
 
+  // Apply the user's stored / browser language after hydration to avoid SSR mismatch
+  useEffect(() => {
+    const preferred = getPreferredLang();
+    if (preferred !== i18n.language) {
+      i18n.changeLanguage(preferred);
+    }
+  }, [i18n]);
+
+
   useEffect(() => {
     const obs = new IntersectionObserver(
       (entries) => {

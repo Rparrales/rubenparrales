@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import "@/i18n";
+import { getPreferredLang } from "@/i18n";
 import {
   Cloud,
   Briefcase,
@@ -23,9 +23,15 @@ import {
   Terminal,
   Zap,
   Languages,
+  DollarSign,
+  Clock,
+  BrainCircuit,
+  Workflow,
+  FileText,
 } from "lucide-react";
 import heroTech from "@/assets/hero-tech.jpg";
 import portraitTech from "@/assets/portrait-tech.jpg";
+
 
 export const Route = createFileRoute("/")({
   component: Index,

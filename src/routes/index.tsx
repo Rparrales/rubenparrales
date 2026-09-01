@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import "@/i18n";
+import { getPreferredLang } from "@/i18n";
 import {
   Cloud,
   Briefcase,
@@ -23,9 +23,15 @@ import {
   Terminal,
   Zap,
   Languages,
+  DollarSign,
+  Clock,
+  BrainCircuit,
+  Workflow,
+  FileText,
 } from "lucide-react";
 import heroTech from "@/assets/hero-tech.jpg";
 import portraitTech from "@/assets/portrait-tech.jpg";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -180,7 +186,17 @@ const PROJECTS = [
   },
 ];
 
+const ENGAGEMENT = [
+  { icon: DollarSign, key: "about.engagement.salary" },
+  { icon: Globe, key: "about.engagement.remote" },
+  { icon: Clock, key: "about.engagement.time" },
+  { icon: BrainCircuit, key: "about.engagement.aiRoi" },
+  { icon: Workflow, key: "about.engagement.automation" },
+  { icon: FileText, key: "about.engagement.visa" },
+];
+
 function Index() {
+
   const [active, setActive] = useState("about");
   const { t, i18n } = useTranslation();
   const [visitors, setVisitors] = useState<number | null>(null);
@@ -205,6 +221,15 @@ function Index() {
       document.documentElement.lang = isEs ? "es" : "en";
     }
   }, [isEs]);
+
+  // Apply the user's stored / browser language after hydration to avoid SSR mismatch
+  useEffect(() => {
+    const preferred = getPreferredLang();
+    if (preferred !== i18n.language) {
+      i18n.changeLanguage(preferred);
+    }
+  }, [i18n]);
+
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -289,7 +314,11 @@ function Index() {
           <div className="contact">
             ruben.parrales@gmail.com · +1 (323) 636-3684 · +506 6123-5401 · USA · CR · Lynwood, CA
           </div>
+          <div className="print-only terms-line" style={{ fontSize: "9pt", marginTop: "2mm", color: "#333" }}>
+            {t("about.engagement.printSummary")}
+          </div>
           <hr />
+
         </header>
 
         {/* HERO */}
@@ -400,7 +429,29 @@ function Index() {
               <Stat icon={Terminal} k="∞" v={t("about.stats.code")} />
             </div>
           </div>
+
+          {/* Engagement terms */}
+          <div className="no-print mt-8 glow-card rounded-2xl p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-10 w-10 rounded-lg bg-[var(--neon)]/10 border border-[var(--neon)]/30 flex items-center justify-center">
+                <Zap className="h-5 w-5 text-[var(--neon)]" aria-hidden="true" />
+              </div>
+              <h3 className="font-display text-2xl">{t("about.engagement.title")}</h3>
+            </div>
+            <ul className="grid sm:grid-cols-2 gap-4">
+              {ENGAGEMENT.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <li key={item.key} className="flex items-start gap-3">
+                    <Icon className="h-5 w-5 text-[var(--neon)] mt-0.5 shrink-0" aria-hidden="true" />
+                    <span className="text-sm text-foreground/80 leading-relaxed">{t(item.key)}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </Section>
+
 
         {/* EXPERIENCE */}
         <Section id="experience" index="02" title={t("sections.experience")}>

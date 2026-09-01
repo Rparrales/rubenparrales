@@ -28,6 +28,16 @@
       "projects": "Projects shipped",
       "clients": "Happy clients",
       "code": "Lines of code"
+    },
+    "engagement": {
+      "title": "Engagement terms",
+      "salary": "Compensation expectation: USD $5,000/month.",
+      "remote": "Remote-only. No on-site work.",
+      "time": "Available for the time the project requires.",
+      "aiRoi": "AI-powered apps that have delivered 35%+ returns for companies.",
+      "automation": "Workflow automation to cut cost and manual work.",
+      "visa": "For U.S. companies: no visa sponsorship required; remote contractor.",
+      "printSummary": "Remote-only · USD $5,000/month · AI ROI 35%+ · No visa required (US)"
     }
   },
   "sections": {
